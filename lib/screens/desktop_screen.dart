@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../core/constants/app_assets.dart';
+import '../../core/constants/app_strings.dart';
+import '../../core/utils/url_helper.dart';
 import '../../data/models/window_model.dart';
 import '../../state/window_manager.dart';
 import '../widgets/common/mac_window.dart';
@@ -11,10 +14,7 @@ import '../widgets/desktop/spotlight_dialog.dart';
 import '../widgets/desktop/top_menu_bar.dart';
 import '../widgets/windows/about_window.dart';
 import '../widgets/windows/achievements_window.dart';
-import '../widgets/windows/contact_window.dart';
 import '../widgets/windows/projects_window.dart';
-import '../widgets/windows/safari_window.dart';
-import '../widgets/windows/settings_window.dart';
 import '../widgets/windows/terminal_window.dart';
 
 class DesktopScreen extends StatefulWidget {
@@ -197,40 +197,6 @@ class _DesktopScreenState extends State<DesktopScreen> {
         ),
         const SizedBox(height: 16),
 
-        // Akademik Sub-folder
-        Padding(
-          padding: const EdgeInsets.only(left: 12),
-          child: DesktopIcon(
-            title: 'Akademik',
-            icon: Icons.school_rounded,
-            iconColor: const Color(0xFF007AFF),
-            badgeText: '5',
-            onOpen: () => wm.openWindow(
-              WindowType.achievements,
-              screenSize: screenSize,
-              subFolder: 'akademik',
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // Partisipan Sub-folder
-        Padding(
-          padding: const EdgeInsets.only(left: 12),
-          child: DesktopIcon(
-            title: 'Partisipan',
-            icon: Icons.workspace_premium_rounded,
-            iconColor: const Color(0xFFAF52DE),
-            badgeText: '4',
-            onOpen: () => wm.openWindow(
-              WindowType.achievements,
-              screenSize: screenSize,
-              subFolder: 'partisipan',
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-
         // Terminal shortcut
         DesktopIcon(
           title: 'Terminal',
@@ -240,12 +206,39 @@ class _DesktopScreenState extends State<DesktopScreen> {
         ),
         const SizedBox(height: 16),
 
-        // Contact shortcut
+        // GitHub Profile (Direct Link)
+        DesktopIcon(
+          title: 'GitHub',
+          customIcon: const FaIcon(FontAwesomeIcons.github, size: 26, color: Colors.white),
+          iconColor: const Color(0xFF24292E),
+          onOpen: () => UrlHelper.openUrl(AppStrings.githubUrl),
+        ),
+        const SizedBox(height: 16),
+
+        // LinkedIn Profile (Direct Link)
+        DesktopIcon(
+          title: 'LinkedIn',
+          customIcon: const FaIcon(FontAwesomeIcons.linkedin, size: 26, color: Colors.white),
+          iconColor: const Color(0xFF0A66C2),
+          onOpen: () => UrlHelper.openUrl(AppStrings.linkedinUrl),
+        ),
+        const SizedBox(height: 16),
+
+        // Instagram Profile (Direct Link)
+        DesktopIcon(
+          title: 'Instagram',
+          customIcon: const FaIcon(FontAwesomeIcons.instagram, size: 26, color: Colors.white),
+          iconColor: const Color(0xFFE4405F),
+          onOpen: () => UrlHelper.openUrl(AppStrings.instagramUrl),
+        ),
+        const SizedBox(height: 16),
+
+        // Contact / Email shortcut (Direct email launch)
         DesktopIcon(
           title: 'Contact',
           icon: Icons.mail_rounded,
           iconColor: const Color(0xFF0A84FF),
-          onOpen: () => wm.openWindow(WindowType.contact, screenSize: screenSize),
+          onOpen: () => UrlHelper.openEmail(AppStrings.email),
         ),
       ],
     );
@@ -259,14 +252,8 @@ class _DesktopScreenState extends State<DesktopScreen> {
         return ProjectsWindow(windowManager: wm);
       case WindowType.achievements:
         return AchievementsWindow(windowManager: wm);
-      case WindowType.contact:
-        return ContactWindow(windowManager: wm);
       case WindowType.terminal:
         return TerminalWindow(windowManager: wm);
-      case WindowType.safari:
-        return SafariWindow(windowManager: wm);
-      case WindowType.settings:
-        return SettingsWindow(windowManager: wm);
     }
   }
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class DesktopIcon extends StatefulWidget {
   final String title;
-  final IconData icon;
+  final IconData? icon;
+  final Widget? customIcon;
   final Color iconColor;
   final VoidCallback onOpen;
   final bool isFolder;
@@ -11,7 +12,8 @@ class DesktopIcon extends StatefulWidget {
   const DesktopIcon({
     super.key,
     required this.title,
-    required this.icon,
+    this.icon,
+    this.customIcon,
     this.iconColor = const Color(0xFF38BDF8),
     required this.onOpen,
     this.isFolder = false,
@@ -78,7 +80,8 @@ class _DesktopIconState extends State<DesktopIcon> {
                       ],
                     ),
                     child: Center(
-                      child: Icon(widget.icon, size: 28, color: Colors.white),
+                      child: widget.customIcon ??
+                          Icon(widget.icon ?? Icons.apps_rounded, size: 28, color: Colors.white),
                     ),
                   ),
                   if (widget.badgeText != null)
