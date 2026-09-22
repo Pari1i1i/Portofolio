@@ -197,7 +197,12 @@ class _IOSHomeScreenState extends State<IOSHomeScreen> {
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(22),
             ),
-            child: WindowContentView(type: type, windowManager: wm),
+            child: ColoredBox(
+              color: isDark
+                  ? AppColors.windowBgDark
+                  : AppColors.windowBgLight,
+              child: WindowContentView(type: type, windowManager: wm),
+            ),
           ),
         ),
         const _HomeIndicator(),

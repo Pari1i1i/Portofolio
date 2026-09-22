@@ -32,6 +32,7 @@ class _AchievementsWindowState extends State<AchievementsWindow> {
   @override
   Widget build(BuildContext context) {
     final isDark = widget.windowManager.isDarkMode;
+    final isMobile = MediaQuery.of(context).size.width < 700;
 
     final filtered = PortfolioData.achievements.where((ach) {
       final matchesCat = _selectedCategory == null || ach.category == _selectedCategory;
@@ -42,6 +43,278 @@ class _AchievementsWindowState extends State<AchievementsWindow> {
       return matchesCat && matchesSearch;
     }).toList();
 
+    if (isMobile) {
+      return _buildMobileLayout(context, isDark, filtered);
+    }
+
+    return _buildDesktopLayout(context, isDark, filtered);
+  }
+
+  // ---------------- Mobile (iOS) layout ----------------
+
+  Widget _buildMobileLayout(
+    BuildContext context,
+    bool isDark,
+    List<AchievementModel> filtered,
+  ) {
+    return Column(
+      children: [
+        // Toolbar
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            color: isDark ? const Color(0xFF1E1E22) : const Color(0xFFEAEAEE),
+            border: Border(
+              bottom: BorderSide(
+                color: isDark ? const Color(0x22FFFFFF) : const Color(0x15000000),
+                width: 0.8,
+              ),
+            ),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.folder_shared_rounded,
+                size: 16,
+                color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Achievement',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                  ),
+                ),
+              ),
+              Text(
+                '${filtered.length} of ${PortfolioData.achievements.length}',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Search
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 10, 16, 4),
+          child: TextField(
+            onChanged: (val) => setState(() => _searchQuery = val),
+            style: TextStyle(
+              fontSize: 13,
+              color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+            ),
+            decoration: InputDecoration(
+              hintText: 'Search certificates...',
+              hintStyle: TextStyle(
+                fontSize: 13,
+                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+              ),
+              prefixIcon: Icon(
+                Icons.search_rounded,
+                size: 18,
+                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+              ),
+              contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+              filled: true,
+              fillColor: isDark ? const Color(0xFF28282C) : const Color(0xFFFFFFFF),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+        ),
+
+        // Category chips
+        SizedBox(
+          height: 44,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+            children: [
+              _chip('All', null, PortfolioData.achievements.length, isDark),
+              _chip('Akademik', AchievementCategory.akademik, PortfolioData.achievements
+                  .where((a) => a.category == AchievementCategory.akademik)
+                  .length, isDark),
+              _chip('Partisipan', AchievementCategory.partisipan, PortfolioData.achievements
+                  .where((a) => a.category == AchievementCategory.partisipan)
+                  .length, isDark),
+            ],
+          ),
+        ),
+
+        // List
+        Expanded(
+          child: filtered.isEmpty
+              ? Center(
+                  child: Text(
+                    'No achievements found',
+                    style: TextStyle(
+                      color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                    ),
+                  ),
+                )
+              : ListView.separated(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+                  itemCount: filtered.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 10),
+                  itemBuilder: (context, index) {
+                    return _buildMobileCard(context, filtered[index], isDark);
+                  },
+                ),
+        ),
+      ],
+    );
+  }
+
+  Widget _chip(
+    String label,
+    AchievementCategory? category,
+    int count,
+    bool isDark,
+  ) {
+    final selected = _selectedCategory == category;
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: GestureDetector(
+        onTap: () => setState(() => _selectedCategory = category),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+          decoration: BoxDecoration(
+            color: selected
+                ? AppColors.accentBlue
+                : isDark
+                    ? const Color(0xFF28282C)
+                    : const Color(0xFFE5E5EA),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Text(
+            '$label • $count',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: selected ? FontWeight.bold : FontWeight.w500,
+              color: selected ? Colors.white : (isDark ? Colors.white70 : Colors.black87),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMobileCard(BuildContext context, AchievementModel item, bool isDark) {
+    final isAkademik = item.category == AchievementCategory.akademik;
+    final badgeColor = isAkademik ? AppColors.accentBlue : AppColors.accentPurple;
+    return GestureDetector(
+      onTap: () => _showCertificateModal(context, item, isDark),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.contentCardDark : AppColors.contentCardLight,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(
+            color: isDark ? const Color(0x22FFFFFF) : const Color(0x18000000),
+            width: 0.8,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: SafeAssetImage(
+                assetPath: item.certificatePath,
+                width: 58,
+                height: 58,
+                fit: BoxFit.cover,
+                fallbackTitle: item.title,
+                fallbackIcon: Icons.workspace_premium_rounded,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: badgeColor.withValues(alpha: 0.16),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          item.category.displayName,
+                          style: TextStyle(
+                            fontSize: 9.5,
+                            fontWeight: FontWeight.bold,
+                            color: badgeColor,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        item.year,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    item.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    item.organizer,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // ---------------- Desktop (macOS) layout ----------------
+
+  Widget _buildDesktopLayout(
+    BuildContext context,
+    bool isDark,
+    List<AchievementModel> filtered,
+  ) {
     return Row(
       children: [
         // Left Finder-style Sidebar

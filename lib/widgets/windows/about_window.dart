@@ -116,7 +116,10 @@ class AboutWindow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 6,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     Text(
                       AppStrings.name,
@@ -126,7 +129,6 @@ class AboutWindow extends StatelessWidget {
                         color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
                       ),
                     ),
-                    const SizedBox(width: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
@@ -162,38 +164,50 @@ class AboutWindow extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Row(
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 4,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    Icon(
-                      Icons.location_on_outlined,
-                      size: 15,
-                      color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      AppStrings.location,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Icon(
-                      Icons.mail_outline_rounded,
-                      size: 15,
-                      color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                    ),
-                    const SizedBox(width: 4),
-                    InkWell(
-                      onTap: () => UrlHelper.openEmail(AppStrings.email),
-                      child: Text(
-                        AppStrings.email,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                          decoration: TextDecoration.underline,
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          size: 15,
+                          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
                         ),
-                      ),
+                        const SizedBox(width: 4),
+                        Text(
+                          AppStrings.location,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.mail_outline_rounded,
+                          size: 15,
+                          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                        ),
+                        const SizedBox(width: 4),
+                        InkWell(
+                          onTap: () => UrlHelper.openEmail(AppStrings.email),
+                          child: Text(
+                            AppStrings.email,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -349,7 +363,10 @@ class AboutWindow extends StatelessWidget {
   }
 
   Widget _buildActionButtons(BuildContext context, bool isDark) {
-    return Row(
+    return Wrap(
+      spacing: 12,
+      runSpacing: 12,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         ElevatedButton.icon(
           onPressed: () => windowManager.openWindow(WindowType.projects),
@@ -362,7 +379,6 @@ class AboutWindow extends StatelessWidget {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
         ),
-        const SizedBox(width: 12),
         OutlinedButton.icon(
           onPressed: () => windowManager.openWindow(WindowType.achievements),
           icon: const Icon(Icons.emoji_events_rounded, size: 16),
@@ -374,7 +390,6 @@ class AboutWindow extends StatelessWidget {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
         ),
-        const SizedBox(width: 12),
         IconButton(
           onPressed: () => UrlHelper.openUrl(AppStrings.githubUrl),
           icon: const FaIcon(FontAwesomeIcons.github, size: 20),
