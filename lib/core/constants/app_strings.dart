@@ -3,7 +3,7 @@ class AppStrings {
   static const String name = 'Achmad Fachri Hidayat';
   static const String username = 'fachri';
   static const String title = 'Software Engineering Student & Developer';
-  static const String email = 'fachri.achmad575@gmail.com';
+  static const String email = 'fachriachmad575@gmail.com';
   static const String phone = '+62813 8568 9461';
   static const String githubUrl = 'https://github.com/Pari1i1i';
   static const String instagramUrl = 'https://www.instagram.com/achmadfachrii__/';

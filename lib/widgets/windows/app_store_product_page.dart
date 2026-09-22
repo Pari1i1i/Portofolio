@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_strings.dart';
 import '../../core/utils/url_helper.dart';
 import '../../data/models/project_model.dart';
 import '../../data/portfolio_data.dart';
@@ -128,7 +129,7 @@ class AppStoreProductPage extends StatelessWidget {
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () => UrlHelper.openEmail(
-                    'fachriachmad575@gmail.com?subject=${project.title}',
+                    '${AppStrings.email}?subject=${project.title}',
                   ),
                   icon: const Icon(Icons.mail_outline_rounded, size: 16),
                   label: const Text(
