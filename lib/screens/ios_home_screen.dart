@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import '../core/constants/app_assets.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_strings.dart';
 import '../core/utils/url_helper.dart';
@@ -33,7 +34,7 @@ class _IOSHomeScreenState extends State<IOSHomeScreen> {
         onTap: () => wm.openWindow(WindowType.about),
       ),
       _IOSApp(
-        label: 'App Store',
+        label: 'Projects',
         icon: Icons.shopping_bag_rounded,
         baseColor: const Color(0xFF0A84FF),
         windowType: WindowType.projects,
@@ -117,7 +118,7 @@ class _IOSHomeScreenState extends State<IOSHomeScreen> {
         ),
       ),
       child: Image.asset(
-        widget.windowManager.currentWallpaper,
+        AppAssets.wallpaperMobile,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
       ),

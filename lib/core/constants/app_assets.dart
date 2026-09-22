@@ -50,6 +50,8 @@ class AppAssets {
   static const String achUnjLiterasi = '$achievements/unj_literasi_2024.png';
 
   // Wallpapers
+  static const String wallpaper = '$images/macos_wp.jpg';
+  static const String wallpaperMobile = '$images/ios_wp.jpg';
   static const String wallpaperMacDark = '$wallpapers/macos_dark.png';
   static const String wallpaperSonoma = '$wallpapers/sonoma.png';
   static const String wallpaperSequoia = '$wallpapers/sequoia.png';

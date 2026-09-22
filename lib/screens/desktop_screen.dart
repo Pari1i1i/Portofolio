@@ -133,19 +133,15 @@ class _DesktopScreenState extends State<DesktopScreen> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: wm.currentWallpaper == AppAssets.wallpaperSonoma
-              ? [const Color(0xFF1E3A8A), const Color(0xFF3B0764), const Color(0xFF0F172A)]
-              : (wm.currentWallpaper == AppAssets.wallpaperSequoia
-                  ? [const Color(0xFF064E3B), const Color(0xFF0F172A), const Color(0xFF1E1B4B)]
-                  : [const Color(0xFF0F172A), const Color(0xFF1E1B4B), const Color(0xFF111827)]),
+          colors: [Color(0xFF0F172A), Color(0xFF1E1B4B), Color(0xFF111827)],
         ),
       ),
       child: Image.asset(
-        wm.currentWallpaper,
+        AppAssets.wallpaper,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) {
           // If asset wallpaper not found, the gradient container already renders flawlessly!
