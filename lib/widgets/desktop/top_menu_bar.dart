@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
 import '../../data/models/window_model.dart';
 import '../../state/window_manager.dart';
@@ -44,6 +43,9 @@ class _TopMenuBarState extends State<TopMenuBar> {
     final wm = widget.windowManager;
     final isDark = wm.isDarkMode;
     final activeTitle = wm.activeWindow?.title ?? AppStrings.finder;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isWideScreen = screenWidth >= 920;
+    final isVeryNarrow = screenWidth < 600;
 
     final dateFormat = DateFormat('EEE d MMM');
     final timeFormat = DateFormat('h:mm a');
@@ -95,42 +97,35 @@ class _TopMenuBarState extends State<TopMenuBar> {
                     color: textColor,
                   ),
                 ),
-                const SizedBox(width: 14),
 
-                // Menu items (Desktop view only)
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    final isDesktop = MediaQuery.of(context).size.width > 700;
-                    if (!isDesktop) return const SizedBox.shrink();
-
-                    return Row(
-                      children: [
-                        _buildMenuText('File', isDark, () => wm.openWindow(WindowType.projects)),
-                        _buildMenuText('Edit', isDark, null),
-                        _buildMenuText('View', isDark, () => wm.toggleControlCenter()),
-                        _buildMenuText('Go', isDark, () => wm.openWindow(WindowType.achievements)),
-                        _buildMenuText('Window', isDark, null),
-                        _buildMenuText('Help', isDark, () => wm.openWindow(WindowType.terminal)),
-                      ],
-                    );
-                  },
-                ),
+                // Menu items (Wide screens only)
+                if (isWideScreen) ...[
+                  const SizedBox(width: 14),
+                  _buildMenuText('File', isDark, () => wm.openWindow(WindowType.projects)),
+                  _buildMenuText('Edit', isDark, null),
+                  _buildMenuText('View', isDark, () => wm.toggleControlCenter()),
+                  _buildMenuText('Go', isDark, () => wm.openWindow(WindowType.achievements)),
+                  _buildMenuText('Window', isDark, null),
+                  _buildMenuText('Help', isDark, () => wm.openWindow(WindowType.terminal)),
+                ],
 
                 const Spacer(),
 
                 // Status Icons
                 // Battery
-                Row(
-                  children: [
-                    Text(
-                      '100%',
-                      style: TextStyle(fontSize: 11, color: textColor),
-                    ),
-                    const SizedBox(width: 4),
-                    Icon(Icons.battery_charging_full_rounded, size: 16, color: textColor),
-                  ],
-                ),
-                const SizedBox(width: 12),
+                if (!isVeryNarrow) ...[
+                  Row(
+                    children: [
+                      Text(
+                        '100%',
+                        style: TextStyle(fontSize: 11, color: textColor),
+                      ),
+                      const SizedBox(width: 4),
+                      Icon(Icons.battery_charging_full_rounded, size: 16, color: textColor),
+                    ],
+                  ),
+                  const SizedBox(width: 10),
+                ],
 
                 // Wi-Fi
                 InkWell(
@@ -141,25 +136,27 @@ class _TopMenuBarState extends State<TopMenuBar> {
                     color: wm.wifiEnabled ? textColor : Colors.grey,
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 10),
 
                 // Spotlight Search
                 InkWell(
                   onTap: () => wm.toggleSpotlight(),
                   child: Icon(Icons.search_rounded, size: 16, color: textColor),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 10),
 
                 // Control Center
                 InkWell(
                   onTap: () => wm.toggleControlCenter(),
                   child: Icon(Icons.tune_rounded, size: 15, color: textColor),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 10),
 
                 // Clock
                 Text(
-                  '${dateFormat.format(_currentTime)}  ${timeFormat.format(_currentTime)}',
+                  isVeryNarrow
+                      ? timeFormat.format(_currentTime)
+                      : '${dateFormat.format(_currentTime)}  ${timeFormat.format(_currentTime)}',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,

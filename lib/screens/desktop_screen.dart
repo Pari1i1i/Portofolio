@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_assets.dart';
-import '../../core/constants/app_strings.dart';
-import '../../core/utils/url_helper.dart';
 import '../../data/models/window_model.dart';
 import '../../state/window_manager.dart';
 import '../widgets/common/mac_window.dart';

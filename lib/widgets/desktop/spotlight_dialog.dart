@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
+import '../../data/models/achievement_model.dart';
 import '../../data/models/window_model.dart';
 import '../../data/portfolio_data.dart';
 import '../../state/window_manager.dart';

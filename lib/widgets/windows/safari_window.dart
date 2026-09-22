@@ -139,7 +139,7 @@ class _SafariWindowState extends State<SafariWindow> {
                     ),
                     child: Row(
                       children: [
-                        FaIcon(tab['icon'] as IconData, size: 12, color: tab['color'] as Color),
+                        Icon(tab['icon'] as IconData, size: 12, color: tab['color'] as Color),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
@@ -195,7 +195,7 @@ class _SafariWindowState extends State<SafariWindow> {
                         shape: BoxShape.circle,
                       ),
                       child: Center(
-                        child: FaIcon(
+                        child:                         Icon(
                           currentTab['icon'] as IconData,
                           size: 32,
                           color: currentTab['color'] as Color,

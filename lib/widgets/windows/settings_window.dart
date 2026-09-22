@@ -76,7 +76,7 @@ class SettingsWindow extends StatelessWidget {
                 ),
                 Switch(
                   value: isDark,
-                  activeColor: AppColors.accentBlue,
+                  activeTrackColor: AppColors.accentBlue,
                   onChanged: (_) => windowManager.toggleTheme(),
                 ),
               ],
