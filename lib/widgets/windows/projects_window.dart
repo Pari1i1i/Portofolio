@@ -328,24 +328,37 @@ class _AppRowCard extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [accent, accent.withValues(alpha: 0.55)],
-                ),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(11),
+                border: Border.all(color: const Color(0x22000000), width: 0.5),
+                boxShadow: [
+                  BoxShadow(
+                    color: accent.withValues(alpha: 0.35),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               child: Center(
-                child: Text(
-                  project.title.isEmpty
-                      ? 'P'
-                      : project.title[0].toUpperCase(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                child: (project.logoPath == null || project.logoPath!.isEmpty)
+                    ? Text(
+                        project.title.isEmpty
+                            ? 'P'
+                            : project.title[0].toUpperCase(),
+                        style: TextStyle(
+                          color: accent,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : SafeAssetImage(
+                        assetPath: project.logoPath!,
+                        width: 42,
+                        height: 42,
+                        fit: BoxFit.contain,
+                        fallbackTitle: project.title,
+                        fallbackIcon: Icons.apps_rounded,
+                      ),
               ),
             ),
             const SizedBox(width: 12),

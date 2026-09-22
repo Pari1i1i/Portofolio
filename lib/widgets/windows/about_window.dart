@@ -310,56 +310,104 @@ class AboutWindow extends StatelessWidget {
   }
 
   Widget _buildSkillsSection(bool isDark) {
-    return Column(
-      children: PortfolioData.skills.entries.map((entry) {
-        return Container(
-          margin: const EdgeInsets.only(bottom: 12),
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: isDark ? AppColors.contentCardDark : AppColors.contentCardLight,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: isDark ? const Color(0x1FFFFFFF) : const Color(0x12000000),
-            ),
-          ),
-          child: Column(
+    final entries = PortfolioData.skills.entries.toList();
+
+    return Container(
+      padding: const EdgeInsets.fromLTRB(18, 18, 18, 20),
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.contentCardDark : AppColors.contentCardLight,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isDark ? const Color(0x1FFFFFFF) : const Color(0x12000000),
+        ),
+      ),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isWide = constraints.maxWidth >= 640;
+          final sections = entries.map(_skillSectionBuilder(isDark)).toList();
+
+          if (!isWide) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (int i = 0; i < sections.length; i++) ...[
+                  if (i > 0)
+                    Container(
+                      height: 1,
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(vertical: 16),
+                      color: isDark ? const Color(0x22FFFFFF) : const Color(0x15000000),
+                    ),
+                  sections[i],
+                ],
+              ],
+            );
+          }
+
+          return Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                entry.key,
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.accentPurple,
+              for (int i = 0; i < sections.length; i++)
+                Expanded(
+                  child: i == 0
+                      ? sections[i]
+                      : Container(
+                          padding: const EdgeInsets.only(left: 18),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              left: BorderSide(
+                                color: isDark ? const Color(0x22FFFFFF) : const Color(0x15000000),
+                                width: 1,
+                              ),
+                            ),
+                          ),
+                          child: sections[i],
+                        ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: entry.value.map((skill) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0x28FFFFFF) : const Color(0x15000000),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      skill,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
             ],
-          ),
-        );
-      }).toList(),
+          );
+        },
+      ),
     );
+  }
+
+  Widget Function(MapEntry<String, List<String>>) _skillSectionBuilder(bool isDark) {
+    return (entry) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              entry.key,
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.3,
+                color: AppColors.accentPurple,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: entry.value.map((skill) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: isDark ? const Color(0x28FFFFFF) : const Color(0x12000000),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    skill,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
+        );
   }
 
   Widget _buildActionButtons(BuildContext context, bool isDark) {

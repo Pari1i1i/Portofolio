@@ -11,6 +11,7 @@ class ProjectModel {
   final String githubUrl;
   final String? demoUrl;
   final String imagePath;
+  final String? logoPath;
   final List<String> screenshots;
   final List<String> keyFeatures;
   final bool isFeatured;
@@ -28,6 +29,7 @@ class ProjectModel {
     required this.githubUrl,
     this.demoUrl,
     required this.imagePath,
+    this.logoPath,
     this.screenshots = const [],
     required this.keyFeatures,
     this.isFeatured = true,

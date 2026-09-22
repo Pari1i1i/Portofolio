@@ -161,83 +161,96 @@ class _DesktopScreenState extends State<DesktopScreen> {
 
     if (isMobile) return const SizedBox.shrink();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // About Me shortcut
-        DesktopIcon(
-          title: 'About Me',
-          icon: Icons.person_pin_rounded,
-          iconColor: const Color(0xFF5856D6),
-          onOpen: () => wm.openWindow(WindowType.about, screenSize: screenSize),
-        ),
-        const SizedBox(height: 16),
+    final screenHeight = screenSize.height;
+    const double reservedForDock = 88;
 
-        // Projects Showcase
-        DesktopIcon(
-          title: 'Projects',
-          icon: Icons.folder_special_rounded,
-          iconColor: const Color(0xFFFF9500),
-          badgeText: '6',
-          onOpen: () => wm.openWindow(WindowType.projects, screenSize: screenSize),
-        ),
-        const SizedBox(height: 16),
+    final icons = <Widget>[
+      // About Me shortcut
+      DesktopIcon(
+        title: 'About Me',
+        icon: Icons.person_pin_rounded,
+        iconColor: const Color(0xFF5856D6),
+        onOpen: () => wm.openWindow(WindowType.about, screenSize: screenSize),
+      ),
+      const SizedBox(height: 10),
 
-        // Achievement Folder (Replaces Packages)
-        DesktopIcon(
-          title: 'Achievement',
-          icon: Icons.emoji_events_rounded,
-          iconColor: const Color(0xFFFF2D55),
-          badgeText: '9',
-          isFolder: true,
-          onOpen: () => wm.openWindow(WindowType.achievements, screenSize: screenSize),
-        ),
-        const SizedBox(height: 16),
+      // Contact / Email shortcut (Direct email launch)
+      DesktopIcon(
+        title: 'Contact',
+        icon: Icons.mail_rounded,
+        iconColor: const Color(0xFF0A84FF),
+        onOpen: () => UrlHelper.openEmail(AppStrings.email),
+      ),
+      const SizedBox(height: 10),
 
-        // Terminal shortcut
-        DesktopIcon(
-          title: 'Terminal',
-          icon: Icons.terminal_rounded,
-          iconColor: const Color(0xFF1C1C1E),
-          onOpen: () => wm.openWindow(WindowType.terminal, screenSize: screenSize),
-        ),
-        const SizedBox(height: 16),
+      // Projects Showcase
+      DesktopIcon(
+        title: 'Projects',
+        icon: Icons.folder_special_rounded,
+        iconColor: const Color(0xFFFF9500),
+        badgeText: '6',
+        onOpen: () => wm.openWindow(WindowType.projects, screenSize: screenSize),
+      ),
+      const SizedBox(height: 10),
 
-        // GitHub Profile (Direct Link)
-        DesktopIcon(
-          title: 'GitHub',
-          customIcon: const FaIcon(FontAwesomeIcons.github, size: 26, color: Colors.white),
-          iconColor: const Color(0xFF24292E),
-          onOpen: () => UrlHelper.openUrl(AppStrings.githubUrl),
-        ),
-        const SizedBox(height: 16),
+      // Achievement Folder (Replaces Packages)
+      DesktopIcon(
+        title: 'Achievement',
+        icon: Icons.emoji_events_rounded,
+        iconColor: const Color(0xFFFF2D55),
+        badgeText: '9',
+        isFolder: true,
+        onOpen: () => wm.openWindow(WindowType.achievements, screenSize: screenSize),
+      ),
+      const SizedBox(height: 10),
 
-        // LinkedIn Profile (Direct Link)
-        DesktopIcon(
-          title: 'LinkedIn',
-          customIcon: const FaIcon(FontAwesomeIcons.linkedin, size: 26, color: Colors.white),
-          iconColor: const Color(0xFF0A66C2),
-          onOpen: () => UrlHelper.openUrl(AppStrings.linkedinUrl),
-        ),
-        const SizedBox(height: 16),
+      // Terminal shortcut
+      DesktopIcon(
+        title: 'Terminal',
+        icon: Icons.terminal_rounded,
+        iconColor: const Color(0xFF1C1C1E),
+        onOpen: () => wm.openWindow(WindowType.terminal, screenSize: screenSize),
+      ),
+      const SizedBox(height: 10),
 
-        // Instagram Profile (Direct Link)
-        DesktopIcon(
-          title: 'Instagram',
-          customIcon: const FaIcon(FontAwesomeIcons.instagram, size: 26, color: Colors.white),
-          iconColor: const Color(0xFFE4405F),
-          onOpen: () => UrlHelper.openUrl(AppStrings.instagramUrl),
-        ),
-        const SizedBox(height: 16),
+      // GitHub Profile (Direct Link)
+      DesktopIcon(
+        title: 'GitHub',
+        customIcon: const FaIcon(FontAwesomeIcons.github, size: 26, color: Colors.white),
+        iconColor: const Color(0xFF24292E),
+        onOpen: () => UrlHelper.openUrl(AppStrings.githubUrl),
+      ),
+      const SizedBox(height: 10),
 
-        // Contact / Email shortcut (Direct email launch)
-        DesktopIcon(
-          title: 'Contact',
-          icon: Icons.mail_rounded,
-          iconColor: const Color(0xFF0A84FF),
-          onOpen: () => UrlHelper.openEmail(AppStrings.email),
+      // LinkedIn Profile (Direct Link)
+      DesktopIcon(
+        title: 'LinkedIn',
+        customIcon: const FaIcon(FontAwesomeIcons.linkedin, size: 26, color: Colors.white),
+        iconColor: const Color(0xFF0A66C2),
+        onOpen: () => UrlHelper.openUrl(AppStrings.linkedinUrl),
+      ),
+      const SizedBox(height: 10),
+
+      // Instagram Profile (Direct Link)
+      DesktopIcon(
+        title: 'Instagram',
+        customIcon: const FaIcon(FontAwesomeIcons.instagram, size: 26, color: Colors.white),
+        iconColor: const Color(0xFFE4405F),
+        onOpen: () => UrlHelper.openUrl(AppStrings.instagramUrl),
+      ),
+    ];
+
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: screenHeight - 48 - reservedForDock,
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: icons,
         ),
-      ],
+      ),
     );
   }
 }

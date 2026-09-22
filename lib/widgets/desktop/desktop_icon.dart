@@ -40,8 +40,8 @@ class _DesktopIconState extends State<DesktopIcon> {
           widget.onOpen();
         },
         child: Container(
-          width: 84,
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+          width: 78,
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
           decoration: BoxDecoration(
             color: _isSelected
                 ? const Color(0x550A84FF)
@@ -59,8 +59,8 @@ class _DesktopIconState extends State<DesktopIcon> {
                 alignment: Alignment.center,
                 children: [
                   Container(
-                    width: 50,
-                    height: 50,
+                    width: 44,
+                    height: 44,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
@@ -70,7 +70,7 @@ class _DesktopIconState extends State<DesktopIcon> {
                           widget.iconColor.withValues(alpha: 0.5),
                         ],
                       ),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(11),
                       boxShadow: [
                         BoxShadow(
                           color: widget.iconColor.withValues(alpha: 0.35),
@@ -81,7 +81,7 @@ class _DesktopIconState extends State<DesktopIcon> {
                     ),
                     child: Center(
                       child: widget.customIcon ??
-                          Icon(widget.icon ?? Icons.apps_rounded, size: 28, color: Colors.white),
+                          Icon(widget.icon ?? Icons.apps_rounded, size: 25, color: Colors.white),
                     ),
                   ),
                   if (widget.badgeText != null)
@@ -107,7 +107,7 @@ class _DesktopIconState extends State<DesktopIcon> {
                     ),
                 ],
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 5),
               Text(
                 widget.title,
                 textAlign: TextAlign.center,
@@ -115,7 +115,7 @@ class _DesktopIconState extends State<DesktopIcon> {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 11,
+                  fontSize: 10.5,
                   fontWeight: FontWeight.w600,
                   shadows: [
                     Shadow(color: Colors.black, blurRadius: 4, offset: Offset(0, 1)),

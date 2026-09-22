@@ -392,32 +392,35 @@ class _AppIconSquare extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            accent,
-            accent.withValues(alpha: 0.55),
-          ],
-        ),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(size * 0.22),
+        border: Border.all(color: const Color(0x22000000), width: 0.5),
         boxShadow: [
           BoxShadow(
-            color: accent.withValues(alpha: 0.4),
+            color: accent.withValues(alpha: 0.35),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
         ],
       ),
       child: Center(
-        child: Text(
-          project.title.isEmpty ? 'P' : project.title[0].toUpperCase(),
-          style: TextStyle(
-            fontSize: size * 0.45,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
+        child: (project.logoPath == null || project.logoPath!.isEmpty)
+            ? Text(
+                project.title.isEmpty ? 'P' : project.title[0].toUpperCase(),
+                style: TextStyle(
+                  fontSize: size * 0.45,
+                  fontWeight: FontWeight.bold,
+                  color: accent,
+                ),
+              )
+            : SafeAssetImage(
+                assetPath: project.logoPath!,
+                width: size * 0.88,
+                height: size * 0.88,
+                fit: BoxFit.contain,
+                fallbackTitle: project.title,
+                fallbackIcon: Icons.apps_rounded,
+              ),
       ),
     );
   }
@@ -466,62 +469,133 @@ class _ScreenshotsRow extends StatelessWidget {
         separatorBuilder: (_, __) => const SizedBox(width: 12),
         itemBuilder: (context, index) {
           final label = index == 0 ? 'Tampilan Utama' : 'Tampilan ${index + 1}';
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Container(
-              width: 128,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: isDark ? const Color(0x33FFFFFF) : const Color(0x22000000),
+          final assetPath = shots[index];
+          return GestureDetector(
+            onTap: () => _openScreenshotViewer(context, assetPath, label),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Container(
+                width: 128,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: isDark ? const Color(0x33FFFFFF) : const Color(0x22000000),
+                  ),
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  SafeAssetImage(
-                    assetPath: shots[index],
-                    fit: BoxFit.cover,
-                    fallbackTitle: project.title,
-                    fallbackIcon: Icons.screenshot_rounded,
-                  ),
-                  // iPhone notch pill
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 6),
-                      width: 44,
-                      height: 5,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.55),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    SafeAssetImage(
+                      assetPath: assetPath,
+                      fit: BoxFit.cover,
+                      fallbackTitle: project.title,
+                      fallbackIcon: Icons.screenshot_rounded,
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.5),
-                      ),
-                      child: Text(
-                        label,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600,
+                    // iPhone notch pill
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 6),
+                        width: 44,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.55),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.5),
+                        ),
+                        child: Text(
+                          label,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
         },
+      ),
+    );
+  }
+
+  void _openScreenshotViewer(BuildContext context, String assetPath, String label) {
+    final size = MediaQuery.of(context).size;
+    showDialog<void>(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.85),
+      builder: (dialogContext) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(8),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: SizedBox(
+                width: size.width - 16,
+                height: size.height - 60,
+                child: InteractiveViewer(
+                  minScale: 0.8,
+                  maxScale: 4,
+                  child: Center(
+                    child: SafeAssetImage(
+                      assetPath: assetPath,
+                      fit: BoxFit.contain,
+                      fallbackTitle: label,
+                      fallbackIcon: Icons.screenshot_rounded,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 4,
+              right: 4,
+              child: Material(
+                color: Colors.black54,
+                shape: const CircleBorder(),
+                child: IconButton(
+                  icon: const Icon(Icons.close_rounded, color: Colors.white),
+                  onPressed: () => Navigator.of(dialogContext).pop(),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 18,
+              left: 18,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

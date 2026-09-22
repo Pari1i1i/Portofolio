@@ -26,11 +26,12 @@ class PortfolioData {
       accentColor: 0xFF0A84FF,
       githubUrl: '${AppStrings.githubUrl}/Eventify-Web',
       demoUrl: AppStrings.githubUrl,
+      logoPath: AppAssets.projectEventifyLogo,
       imagePath: AppAssets.projectEventifyWeb,
       screenshots: [
         AppAssets.projectEventifyWeb,
-        AppAssets.wallpaperSonoma,
-        AppAssets.wallpaperSequoia,
+        AppAssets.projectEventifyWeb2,
+        AppAssets.projectEventifyWeb3,
       ],
       keyFeatures: [
         'Dashboard statistik pendapatan, tiket terjual, kehadiran, dan grafik (Recharts)',
@@ -59,11 +60,12 @@ class PortfolioData {
       accentColor: 0xFF5856D6,
       githubUrl: '${AppStrings.githubUrl}/Eventify_Mobile',
       demoUrl: AppStrings.githubUrl,
+      logoPath: AppAssets.projectEventifyLogo,
       imagePath: AppAssets.projectEventifyMobile,
       screenshots: [
         AppAssets.projectEventifyMobile,
-        AppAssets.wallpaperSequoia,
-        AppAssets.wallpaperMacDark,
+        AppAssets.projectEventifyMobile2,
+        AppAssets.projectEventifyMobile3,
       ],
       keyFeatures: [
         'Autentikasi login, register, dan Google Sign-In dengan secure storage',
@@ -92,11 +94,12 @@ class PortfolioData {
       accentColor: 0xFF30D158,
       githubUrl: '${AppStrings.githubUrl}/PelariKalcer',
       demoUrl: AppStrings.githubUrl,
+      logoPath: AppAssets.projectPelariKalcerLogo,
       imagePath: AppAssets.projectPelariKalcer,
       screenshots: [
         AppAssets.projectPelariKalcer,
-        AppAssets.wallpaperMacDark,
-        AppAssets.wallpaperSequoia,
+        AppAssets.projectPelariKalcer2,
+        AppAssets.projectPelariKalcer3,
       ],
       keyFeatures: [
         'Papan peringkat komunitas realtime dengan Supabase Realtime',
@@ -125,11 +128,12 @@ class PortfolioData {
       accentColor: 0xFFFF9500,
       githubUrl: '${AppStrings.githubUrl}/tokokita',
       demoUrl: AppStrings.githubUrl,
+      logoPath: AppAssets.projectTokoKitaLogo,
       imagePath: AppAssets.projectTokoKita,
       screenshots: [
         AppAssets.projectTokoKita,
-        AppAssets.wallpaperSonoma,
-        AppAssets.wallpaperMacDark,
+        AppAssets.projectTokoKita2,
+        AppAssets.projectTokoKita3,
       ],
       keyFeatures: [
         'Dashboard multi-role: user, admin, dan superadmin',
@@ -157,11 +161,12 @@ class PortfolioData {
       accentColor: 0xFF5E5CE6,
       githubUrl: '${AppStrings.githubUrl}/properti24',
       demoUrl: AppStrings.githubUrl,
+      logoPath: AppAssets.projectProperti24Logo,
       imagePath: AppAssets.projectProperti24,
       screenshots: [
         AppAssets.projectProperti24,
-        AppAssets.wallpaperSonoma,
-        AppAssets.wallpaperSequoia,
+        AppAssets.projectProperti242,
+        AppAssets.projectProperti243,
       ],
       keyFeatures: [
         'Katalog aset dengan filter, cart multi-peminjaman, dan approval booking',
@@ -189,11 +194,12 @@ class PortfolioData {
       accentColor: 0xFFFF2D55,
       githubUrl: '${AppStrings.githubUrl}/KimikoSweet',
       demoUrl: AppStrings.githubUrl,
+      logoPath: AppAssets.projectKimikoLogo,
       imagePath: AppAssets.projectKimikoSweets,
       screenshots: [
         AppAssets.projectKimikoSweets,
-        AppAssets.wallpaperSequoia,
-        AppAssets.wallpaperSonoma,
+        AppAssets.projectKimikoSweets2,
+        AppAssets.projectKimikoSweets3,
       ],
       keyFeatures: [
         'Katalog 13 varian choux pastry dengan mode offline (LocalStorage)',
@@ -321,29 +327,27 @@ class PortfolioData {
 
   // Technical skills
   static const Map<String, List<String>> skills = {
-    'Mobile & Front-End': [
+    'Technical Skill': [
+      'C# / .NET',
+      'Kotlin',
       'Flutter',
       'Dart',
-      'State Management (Provider, Bloc)',
-      'Responsive Web Design',
-      'HTML5 & CSS3',
-      'JavaScript ES6+',
+      'Web Dev (HTML, CSS, JS)',
+      'REST API & SQL Database',
+      'Git & Version Control',
+      'Microsoft Office',
+      'PHP',
+      'Java',
     ],
-    'Architecture & Back-End': [
-      'Clean Architecture',
-      'RESTful APIs',
-      'JSON Serialization',
-      'Firebase & Supabase',
-      'Java & OOP',
-      'Database (SQL & NoSQL)',
+    'Soft Skill': [
+      'Problem Solving & Logic',
+      'Teamwork & Collaboration',
+      'Time Management',
+      'Fast Learner & Adaptability',
     ],
-    'Tools & Workflow': [
-      'Git & GitHub',
-      'VS Code & Android Studio',
-      'Figma & UI Prototyping',
-      'Postman',
-      'CI/CD Workflows',
-      'macOS & Linux Terminal',
+    'Languages': [
+      'Bahasa Indonesia (Native)',
+      'English',
     ],
   };
 
