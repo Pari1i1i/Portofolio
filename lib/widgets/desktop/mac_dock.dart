@@ -81,27 +81,20 @@ class _MacDockState extends State<MacDock> {
         onTap: () => wm.openWindow(WindowType.achievements),
       ),
       MacDockItem(
-        label: 'Safari',
-        icon: Icons.explore_rounded,
-        baseColor: const Color(0xFF00C7BE),
-        windowType: WindowType.safari,
-        onTap: () => wm.openWindow(WindowType.safari),
-      ),
-      MacDockItem(
         label: 'Terminal',
         icon: Icons.terminal_rounded,
         baseColor: const Color(0xFF1C1C1E),
         windowType: WindowType.terminal,
         onTap: () => wm.openWindow(WindowType.terminal),
       ),
+      // Direct action & Social icons
       MacDockItem(
-        label: 'Mail',
+        label: 'Contact (Email)',
         icon: Icons.mail_rounded,
         baseColor: const Color(0xFF0A84FF),
-        windowType: WindowType.contact,
-        onTap: () => wm.openWindow(WindowType.contact),
+        isExternal: true,
+        onTap: () => UrlHelper.openEmail(AppStrings.email),
       ),
-      // Separator handled in build
       MacDockItem(
         label: 'GitHub',
         customIcon: const FaIcon(FontAwesomeIcons.github, size: 24, color: Colors.white),
@@ -122,13 +115,6 @@ class _MacDockState extends State<MacDock> {
         baseColor: const Color(0xFFE4405F),
         isExternal: true,
         onTap: () => UrlHelper.openUrl(AppStrings.instagramUrl),
-      ),
-      MacDockItem(
-        label: 'System Settings',
-        icon: Icons.settings_rounded,
-        baseColor: const Color(0xFF8E8E93),
-        windowType: WindowType.settings,
-        onTap: () => wm.openWindow(WindowType.settings),
       ),
       MacDockItem(
         label: 'Trash',
@@ -195,8 +181,8 @@ class _MacDockState extends State<MacDock> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     for (int i = 0; i < _dockItems.length; i++) ...[
-                      if (i == 7) ...[
-                        // Divider before social / system items
+                      if (i == 5) ...[
+                        // Divider before social / direct action items
                         Container(
                           width: 1,
                           height: baseIconSize * 0.75,
