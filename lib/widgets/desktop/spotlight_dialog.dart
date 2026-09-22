@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_strings.dart';
+import '../../core/utils/url_helper.dart';
 import '../../data/models/achievement_model.dart';
 import '../../data/models/window_model.dart';
 import '../../data/portfolio_data.dart';
@@ -133,9 +135,9 @@ class _SpotlightDialogState extends State<SpotlightDialog> {
                           widget.windowManager.closeOverlays();
                           widget.windowManager.openWindow(WindowType.terminal);
                         }, isDark),
-                        _buildAppItem('Contact & Socials', Icons.mail_rounded, () {
+                        _buildAppItem('Contact (Email)', Icons.mail_rounded, () {
                           widget.windowManager.closeOverlays();
-                          widget.windowManager.openWindow(WindowType.contact);
+                          UrlHelper.openEmail(AppStrings.email);
                         }, isDark),
                       ] else ...[
                         if (matchedProjects.isNotEmpty) ...[

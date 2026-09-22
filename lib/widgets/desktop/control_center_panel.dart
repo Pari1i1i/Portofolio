@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
-import '../../data/models/window_model.dart';
 import '../../state/window_manager.dart';
 
 class ControlCenterPanel extends StatelessWidget {
@@ -137,39 +136,6 @@ class ControlCenterPanel extends StatelessWidget {
                   value: windowManager.volume,
                   onChanged: (v) => windowManager.setVolume(v),
                   isDark: isDark,
-                ),
-                const SizedBox(height: 14),
-
-                // Quick Launcher: Settings
-                InkWell(
-                  onTap: () {
-                    windowManager.closeOverlays();
-                    windowManager.openWindow(WindowType.settings);
-                  },
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0x28FFFFFF) : const Color(0x12000000),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.settings_rounded, size: 16),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Open System Settings',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: isDark ? Colors.white : Colors.black87,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ],
             ),

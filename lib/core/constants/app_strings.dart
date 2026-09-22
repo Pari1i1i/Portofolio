@@ -21,9 +21,6 @@ class AppStrings {
   static const String aboutMe = 'About Me';
   static const String projects = 'Projects';
   static const String achievements = 'Achievement';
-  static const String contact = 'Contact';
   static const String terminal = 'Terminal';
-  static const String safari = 'Safari';
-  static const String settings = 'System Settings';
   static const String trash = 'Trash';
 }

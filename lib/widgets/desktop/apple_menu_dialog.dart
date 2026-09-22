@@ -54,14 +54,6 @@ class AppleMenuDialog extends StatelessWidget {
                 ),
                 _buildDivider(isDark),
                 _buildMenuItem(
-                  'System Settings...',
-                  isDark,
-                  onTap: () {
-                    windowManager.closeOverlays();
-                    windowManager.openWindow(WindowType.settings);
-                  },
-                ),
-                _buildMenuItem(
                   'Visit GitHub Repository',
                   isDark,
                   onTap: () {

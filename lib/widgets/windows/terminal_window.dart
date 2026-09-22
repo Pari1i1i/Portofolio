@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_strings.dart';
+import '../../core/utils/url_helper.dart';
 import '../../data/models/window_model.dart';
 import '../../data/portfolio_data.dart';
 import '../../state/window_manager.dart';
@@ -143,7 +144,7 @@ class _TerminalWindowState extends State<TerminalWindow> {
 
         case 'open':
           if (arg.isEmpty) {
-            _history.add('Usage: open <app> (e.g. open projects, open achievements, open contact)');
+            _history.add('Usage: open <app> (e.g. open projects, open achievements, open about)');
           } else if (arg.contains('project')) {
             widget.windowManager.openWindow(WindowType.projects);
             _history.add('Opening Projects window...');
@@ -154,11 +155,11 @@ class _TerminalWindowState extends State<TerminalWindow> {
             widget.windowManager.openWindow(WindowType.about);
             _history.add('Opening About Me window...');
           } else if (arg.contains('contact') || arg.contains('mail')) {
-            widget.windowManager.openWindow(WindowType.contact);
-            _history.add('Opening Contact window...');
-          } else if (arg.contains('safari')) {
-            widget.windowManager.openWindow(WindowType.safari);
-            _history.add('Opening Safari window...');
+            UrlHelper.openEmail(AppStrings.email);
+            _history.add('Launching default mail client...');
+          } else if (arg.contains('github')) {
+            UrlHelper.openUrl(AppStrings.githubUrl);
+            _history.add('Opening GitHub in browser...');
           } else {
             _history.add('Unknown app: $arg. Type "help" for options.');
           }
