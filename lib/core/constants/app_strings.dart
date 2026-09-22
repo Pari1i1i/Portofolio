@@ -1,19 +1,20 @@
 class AppStrings {
-  static const String appTitle = 'Fachri Achmad | Portfolio';
-  static const String name = 'Fachri Achmad';
+  static const String appTitle = 'Achmad Fachri Hidayat | Portfolio';
+  static const String name = 'Achmad Fachri Hidayat';
   static const String username = 'fachri';
-  static const String title = 'Software Engineer & Flutter Developer';
-  static const String email = 'fachriachmad575@gmail.com';
+  static const String title = 'Software Engineering Student & Developer';
+  static const String email = 'fachri.achmad575@gmail.com';
+  static const String phone = '+62813 8568 9461';
   static const String githubUrl = 'https://github.com/Pari1i1i';
   static const String instagramUrl = 'https://www.instagram.com/achmadfachrii__/';
   static const String linkedinUrl = 'https://www.linkedin.com/in/fachriii/';
-  static const String location = 'Jakarta, Indonesia';
-  
+  static const String location = 'East Jakarta, Indonesia';
+
   static const String bio =
-      'Passionate and results-driven Software Engineer with extensive experience in Flutter cross-platform mobile and web application development. Dedicated to building performant, pixel-perfect user experiences, modern clean architectures, and scalable digital solutions.';
+      'Software Engineering student (RPL) at SMK Negeri 24 Jakarta, specializing in mobile and web application development with Flutter, JavaScript, and backend stacks. Experienced in building real products from concept to deployment, including marketplace, event management, and community platforms. Passionate about clean architecture, REST APIs, and crafting delightful, high-performance user experiences.';
 
   static const String aboutShort =
-      'Hi there! I am Fachri Achmad, a passionate Flutter Developer based in Jakarta. Welcome to my interactive macOS-inspired portfolio!';
+      'Hi there! I am Achmad Fachri Hidayat, a creative Software Engineering student & developer based in East Jakarta. Welcome to my interactive macOS-inspired portfolio!';
 
   // Menu bar
   static const String appleMenu = '';
