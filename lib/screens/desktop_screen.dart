@@ -12,10 +12,7 @@ import '../widgets/desktop/desktop_icon.dart';
 import '../widgets/desktop/mac_dock.dart';
 import '../widgets/desktop/spotlight_dialog.dart';
 import '../widgets/desktop/top_menu_bar.dart';
-import '../widgets/windows/about_window.dart';
-import '../widgets/windows/achievements_window.dart';
-import '../widgets/windows/projects_window.dart';
-import '../widgets/windows/terminal_window.dart';
+import '../widgets/windows/window_content_view.dart';
 
 class DesktopScreen extends StatefulWidget {
   final WindowManager windowManager;
@@ -71,7 +68,7 @@ class _DesktopScreenState extends State<DesktopScreen> {
                     item: win,
                     windowManager: wm,
                     screenSize: screenSize,
-                    content: _buildWindowContent(win.type, wm),
+                    content: WindowContentView(type: win.type, windowManager: wm),
                   );
                 }),
 
@@ -242,18 +239,5 @@ class _DesktopScreenState extends State<DesktopScreen> {
         ),
       ],
     );
-  }
-
-  Widget _buildWindowContent(WindowType type, WindowManager wm) {
-    switch (type) {
-      case WindowType.about:
-        return AboutWindow(windowManager: wm);
-      case WindowType.projects:
-        return ProjectsWindow(windowManager: wm);
-      case WindowType.achievements:
-        return AchievementsWindow(windowManager: wm);
-      case WindowType.terminal:
-        return TerminalWindow(windowManager: wm);
-    }
   }
 }

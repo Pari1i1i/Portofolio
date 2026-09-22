@@ -14,9 +14,16 @@ class PortfolioData {
       description:
           'Platform web terintegrasi untuk eksplorasi event, registrasi peserta, transaksi e-ticket instan, dan dasbor analitik bagi event creator. Didesain secara responsif untuk performa tinggi di browser desktop maupun mobile.',
       techStack: ['Flutter Web', 'Dart', 'REST API', 'Responsive UI', 'Provider'],
+      role: 'Flutter Web Developer',
+      accentColor: 0xFF0A84FF,
       githubUrl: '${AppStrings.githubUrl}/eventifyweb',
       demoUrl: AppStrings.githubUrl,
       imagePath: AppAssets.projectEventifyWeb,
+      screenshots: [
+        AppAssets.projectEventifyWeb,
+        AppAssets.wallpaperSonoma,
+        AppAssets.wallpaperSequoia,
+      ],
       keyFeatures: [
         'Katalog event dinamis dengan multi-kategori dan filter interaktif',
         'Sistem reservasi tiket dan checkout online yang aman',
@@ -32,9 +39,16 @@ class PortfolioData {
       description:
           'Aplikasi mobile pendamping event yang mempermudah pengunjung menemukan konser, seminar, dan festival terdekat, menyimpan e-ticket ke dalam dompet digital aplikasi, serta dilengkapi scanner QR ultra-cepat bagi panitia di pintu masuk.',
       techStack: ['Flutter', 'Dart', 'QR Scanner', 'Camera', 'Clean Architecture'],
+      role: 'Mobile App Developer',
+      accentColor: 0xFF5856D6,
       githubUrl: '${AppStrings.githubUrl}/eventifymobile',
       demoUrl: AppStrings.githubUrl,
       imagePath: AppAssets.projectEventifyMobile,
+      screenshots: [
+        AppAssets.projectEventifyMobile,
+        AppAssets.wallpaperSequoia,
+        AppAssets.wallpaperMacDark,
+      ],
       keyFeatures: [
         'Tiket offline dengan QR Code terenkripsi',
         'Pemindai tiket cepat dengan indikator audio dan visual validasi',
@@ -50,9 +64,16 @@ class PortfolioData {
       description:
           'Aplikasi khusus komunitas lari urban yang mengombinasikan pelacakan rute GPS real-time, metrik performa (pace, jarak, estimasi kalori, cadence), papan peringkat mingguan, dan feed sosial interaktif untuk berbagi pencapaian lari.',
       techStack: ['Flutter', 'Dart', 'GPS Tracking', 'Google Maps API', 'Sensors'],
+      role: 'Flutter Developer — GPS & IoT',
+      accentColor: 0xFF30D158,
       githubUrl: '${AppStrings.githubUrl}/pelarikalcer',
       demoUrl: AppStrings.githubUrl,
       imagePath: AppAssets.projectPelariKalcer,
+      screenshots: [
+        AppAssets.projectPelariKalcer,
+        AppAssets.wallpaperMacDark,
+        AppAssets.wallpaperSequoia,
+      ],
       keyFeatures: [
         'Live tracking rute lari dengan peta interaktif dan penanda waypoint',
         'Kalkulasi metrik lari otomatis (Pace, Split Kilometer, Heart Rate)',
@@ -68,9 +89,16 @@ class PortfolioData {
       description:
           'Solusi marketplace belanja online modern dengan antarmuka cepat, manajemen varian produk lengkap, keranjang belanja dinamis, kalkulator ongkos kirim multi-kurir, dan simulasi pembayaran multi-channel.',
       techStack: ['Flutter', 'Dart', 'State Management', 'REST API', 'Payment Flow'],
+      role: 'Full-Stack Flutter Developer',
+      accentColor: 0xFFFF9500,
       githubUrl: '${AppStrings.githubUrl}/tokokita',
       demoUrl: AppStrings.githubUrl,
       imagePath: AppAssets.projectTokoKita,
+      screenshots: [
+        AppAssets.projectTokoKita,
+        AppAssets.wallpaperSonoma,
+        AppAssets.wallpaperMacDark,
+      ],
       keyFeatures: [
         'Pencarian produk cerdas dengan filter harga, rating, dan kategori',
         'Manajemen keranjang belanja dengan sinkronisasi instan',
@@ -86,9 +114,16 @@ class PortfolioData {
       description:
           'Platform jual-beli dan sewa properti terkemuka. Menyajikan listing rumah, apartemen, dan tanah dengan detail komprehensif, tur virtual foto sudut lebar, simulasi kalkulator KPR interaktif, dan penghubung langsung ke agen resmi via WhatsApp.',
       techStack: ['Flutter', 'Dart', 'Geolocation', 'Form Calculation', 'UI Kit'],
+      role: 'UI/UX & Flutter Developer',
+      accentColor: 0xFF5E5CE6,
       githubUrl: '${AppStrings.githubUrl}/properti24',
       demoUrl: AppStrings.githubUrl,
       imagePath: AppAssets.projectProperti24,
+      screenshots: [
+        AppAssets.projectProperti24,
+        AppAssets.wallpaperSonoma,
+        AppAssets.wallpaperSequoia,
+      ],
       keyFeatures: [
         'Kalkulator simulasi KPR interaktif (bunga flat & floating, tenor, DP)',
         'Pencarian properti berdasarkan radius radius lokasi sekitar pengguna',
@@ -104,9 +139,16 @@ class PortfolioData {
       description:
           'Aplikasi pemesanan dessert manis dan kue artisan premium dengan pengalaman visual yang memanjakan mata (aesthetic pastel UI), animasi mikro yang halus, kustomisasi topping kue khusus acara, dan sistem review pelanggan.',
       techStack: ['Flutter', 'Dart', 'Micro-Animations', 'Responsive Layout', 'Cart Flow'],
+      role: 'Front-End Developer (Flutter)',
+      accentColor: 0xFFFF2D55,
       githubUrl: '${AppStrings.githubUrl}/kimikosweets',
       demoUrl: AppStrings.githubUrl,
       imagePath: AppAssets.projectKimikoSweets,
+      screenshots: [
+        AppAssets.projectKimikoSweets,
+        AppAssets.wallpaperSequoia,
+        AppAssets.wallpaperSonoma,
+      ],
       keyFeatures: [
         'Katalog pastry & cake dengan animasi transisi hero yang memukau',
         'Customizer kue ulang tahun (pilih base cake, filling, pesan ucapan)',

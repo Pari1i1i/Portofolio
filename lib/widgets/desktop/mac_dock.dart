@@ -67,6 +67,13 @@ class _MacDockState extends State<MacDock> {
         onTap: () => wm.openWindow(WindowType.about),
       ),
       MacDockItem(
+        label: 'Contact (Email)',
+        icon: Icons.mail_rounded,
+        baseColor: const Color(0xFF0A84FF),
+        isExternal: true,
+        onTap: () => UrlHelper.openEmail(AppStrings.email),
+      ),
+      MacDockItem(
         label: 'Projects',
         icon: Icons.folder_special_rounded,
         baseColor: const Color(0xFFFF9500),
@@ -88,13 +95,6 @@ class _MacDockState extends State<MacDock> {
         onTap: () => wm.openWindow(WindowType.terminal),
       ),
       // Direct action & Social icons
-      MacDockItem(
-        label: 'Contact (Email)',
-        icon: Icons.mail_rounded,
-        baseColor: const Color(0xFF0A84FF),
-        isExternal: true,
-        onTap: () => UrlHelper.openEmail(AppStrings.email),
-      ),
       MacDockItem(
         label: 'GitHub',
         customIcon: const FaIcon(FontAwesomeIcons.github, size: 24, color: Colors.white),
@@ -147,7 +147,7 @@ class _MacDockState extends State<MacDock> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 700;
 
-    final baseIconSize = isMobile ? 38.0 : 48.0;
+    final baseIconSize = isMobile ? 32.0 : 42.0;
 
     return Center(
       child: MouseRegion(
@@ -181,7 +181,7 @@ class _MacDockState extends State<MacDock> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     for (int i = 0; i < _dockItems.length; i++) ...[
-                      if (i == 5) ...[
+                      if (i == 6) ...[
                         // Divider before social / direct action items
                         Container(
                           width: 1,

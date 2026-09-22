@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'core/constants/app_strings.dart';
 import 'core/theme/app_theme.dart';
 import 'screens/desktop_screen.dart';
+import 'screens/ios_home_screen.dart';
 import 'state/window_manager.dart';
 
 void main() {
@@ -36,8 +37,26 @@ class _PortfolioAppState extends State<PortfolioApp> {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: _windowManager.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          home: DesktopScreen(windowManager: _windowManager),
+          home: _ResponsiveShell(windowManager: _windowManager),
         );
+      },
+    );
+  }
+}
+
+class _ResponsiveShell extends StatelessWidget {
+  final WindowManager windowManager;
+
+  const _ResponsiveShell({required this.windowManager});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 700;
+        return isMobile
+            ? IOSHomeScreen(windowManager: windowManager)
+            : DesktopScreen(windowManager: windowManager);
       },
     );
   }
